@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VUE BLOG</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <h1>Welcome to my Blog Site!</h1>
+    <div id="blogPosts">
+        <blog-post
+                v-for="post in posts"
+                v-bind:blogpost="post"
+        ></blog-post>
+    </div>
+
+    <div id="blogPostCreation">
+        <h2>Make a new blog post</h2>
+        <input v-model="title"><br>
+        <input v-model="username"><br>
+        <input v-model="date"><br>
+        <input v-model="content"><br>
+        <button v-on:click="publishPost">Publish Post</button>
+    </div>
+
+    <script>
+        Vue.component('blog-post',{
+            props: ['blogpost'],
+            template: `<div id="singleBlogPost">
+        <h2>{{blogpost.title}}</h2>
+        <h3>{{blogpost.username}}</h3>
+        <h4>{{blogpost.date}}</h4>
+        <p>{{blogpost.content}}</p>
+    </div>`
+        })
+
+        var vue = new Vue({
+            el: '#blogPosts',
+            data: {
+                posts: [
+                    {title: 'First Post', username: 'Gabryel', date: 'May 17, 2019', content: 'This is the content of my very interstig first post.'},
+                    {title: 'Second Post', username: 'Gabryel', date: 'May 15, 2019', content: 'This is the content of my very interstig second post.'},
+                ]
+            }
+        })
+
+        var createBlogVue = new Vue({
+            el: '#blogPostCreation',
+            data: {
+                title: '',
+                username: '',
+                date: '',
+                content: ''
+            },
+            methods: {
+                publishPost: function () {
+                    var postData = {
+                        title: this.title,
+                        username: this.username,
+                        date: this.date,
+                        content: this.content
+                    }
+                    vue.posts.push(postData)
+                    this.title = ''
+                    this.username = ''
+                    this.date = ''
+                    this.content = ''
+                }
+            }
+        })
+    </script>
+</body>
+</html>

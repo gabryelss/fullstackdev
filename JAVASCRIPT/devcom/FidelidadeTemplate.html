@@ -1,0 +1,131 @@
+<div class="cec_selectableItemForFidelidade" ng-controller="labsxdVlcPortabilidadeFidelidade">
+    <div class="slds-section" ng-class="{'slds-is-open': isClicked === true, 'slds-is-close': isClicked === false}"  ng-repeat="i in bpTree.response.vlcPersistentComponent.vlcCart.records" ng-init="i.fidelityConfigurationStep = {};  " ng-if="i.ReliesOnReferenceId__c.value == i.Id.value || i.ReliesOnReferenceId__c.value == null">
+        <h3 class="slds-section__title">
+            <button aria-controls="expando-unique-id" aria-expanded="true" class="slds-fidelidade-button slds-section__title-action" ng-click="isClicked = !isClicked;">
+                <div class="slds-section-icon">
+                    <img class="slds-family-icon" src='{{product.familyIcon}}'>
+                </div>
+                <span class="slds-fidelidade-button slds-truncate" title="Section Title"><h1 class="slds-section__title_h1"><span class='title-family'>{{i.PricebookEntry.Product2.Family}}</span> - {{i.Product2.Name}}</h1> </span>
+                <svg class="slds-section__title-action-icon slds-fidelidade-button__icon slds-button__icon_right" aria-hidden="true">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#switch" />
+                </svg>
+            </button>
+        </h3>
+        <div aria-hidden="false" class="slds-section__content" id="expando-unique-id-{{$index}}" >
+            <div class="slds-container" ng-if="!i.PricebookEntry.Product2.MostrarFidelidade__c" style="color: #000;padding-left: 1rem;">
+                <b>{{i.DescricaoMulta__c.value}}</b>
+            </div>
+            <div class="slds-container" ng-if="i.PricebookEntry.Product2.MostrarFidelidade__c==true" style="color: #000;padding-left: 1rem;">
+                <!--ng-if="i.DescricaoMulta__c.value==false"
+                -->
+                <b>{{::$root.vlocity.getCustomLabel('CEC_OmniFidelity_AddFidelity', 'Você gostaria de adicionar fidelidade?')}}</b>
+                <div class="slds-form-element__control" style="color: #000;padding-left: 1rem;" >
+                    <label class="slds-radio__label" for="{{control.name}}-fidelity-{{$index}}-si">
+						 <span class="slds-radio">
+							<input id='{{control.name}}-fidelity-{{$index}}-si'
+                                   type='radio'
+                                   ng-model='i.Fidelidade__c.value'
+                                   name="{{control.name}}-fidelity-{{$index}}"
+                                   value=true
+                                   ng-value=true
+                                   ng-click='addToCart(i);'
+                                   ng-init="i.Fidelidade__c.value"
+                            />
+							<span class="slds-radio--faux ng-scope"></span>
+							<span class="slds-form-element__label" style="color: #000;" >{{::$root.vlocity.getCustomLabel('CEC_OmniYes', 'Sim')}}</span>
+					  </span>
+                    </label>
+                    <label class="slds-radio__label" for="{{control.name}}-fidelity-{{$index}}-no">
+						<span class="slds-radio">
+							<input id='{{control.name}}-fidelity-{{$index}}-no'
+                                   type='radio'
+                                   ng-model='i.Fidelidade__c.value'
+                                   name="{{control.name}}-fidelity-{{$index}}"
+                                   value=false
+                                   ng-value=false
+                                   ng-click='addToCart(i);'
+                            />
+
+							<span class="slds-radio--faux ng-scope"></span>
+							<span class="slds-form-element__label" style="color: #000;" >{{::$root.vlocity.getCustomLabel('CEC_OmniNo', 'Não')}}</span>
+						</span>
+                    </label>
+                    <fieldset class="slds-form-element slds-form-element_compound" ng-show="i.Fidelidade__c.value === true">
+                        <span class="slds-form-element__label" style="color: #000;" >{{i.DescricaoMulta__c.value}}</span>
+                    </fieldset>
+                </div>
+
+
+
+
+
+            </div>
+
+            <!--BEGIN DEPENDENTES-->
+
+            <div class="slds-section" ng-class="{'slds-is-open': isClickedDependente === true, 'slds-is-close': isClickedDependente === false}"  ng-repeat="iDependente in getDependentesByParent(bpTree.response.vlcPersistentComponent.vlcCart.records) " ng-init="iDependente.fidelityConfigurationStep = {}; indexDependente=$index+1000 " ng-if="iDependente.PricebookEntry.Product2.vlocity_cmt__Type__c == 'Dependente' && iDependente.ReliesOnReferenceId__c.value == i.vlocity_cmt__AssetReferenceId__c.value" style="padding-left: 18px;">
+                <h3 class="slds-section__title">
+                    <button aria-controls="expando-unique-id-{{indexDependente}}" aria-expanded="true" class="slds-fidelidade-button slds-section__title-action" ng-click="isClickedDependente = !isClickedDependente;">
+                        <span class="slds-fidelidade-button slds-truncate" title="iDependente.Product2.Name"><h1 class="slds-section__title_h1">{{iDependente.Product2.Name}}</h1> </span>
+                    </button>
+                </h3>
+                <div aria-hidden="false" class="slds-section__content" id="expando-unique-id-{{indexDependente}}" >
+                    <div class="slds-container" ng-if="!iDependente.PricebookEntry.Product2.MostrarFidelidade__c" style="color: #000;padding-left: 1rem;">
+                        <b>{{iDependente.DescricaoMulta__c.value}}</b>
+                    </div>
+                    <div class="slds-container" ng-if="iDependente.PricebookEntry.Product2.MostrarFidelidade__c==true" style="color: #000;padding-left: 1rem;">
+                        <!--ng-if="i.DescricaoMulta__c.value==false"
+                        -->
+                        <b>{{::$root.vlocity.getCustomLabel('CEC_OmniFidelity_AddFidelity', 'Você gostaria de adicionar fidelidade?')}}</b>
+                        <div class="slds-form-element__control" style="color: #000;padding-left: 1rem;" >
+                            <label class="slds-radio__label" for="{{control.name}}-fidelityDependente-{{indexDependente}}-si">
+									 <span class="slds-radio">
+										<input id='{{control.name}}-fidelityDependente-{{indexDependente}}-si'
+                                               type='radio'
+                                               ng-model='iDependente.Fidelidade__c.value'
+                                               name="{{control.name}}-fidelityDependente-{{indexDependente}}"
+                                               value=true
+                                               ng-value=true
+                                               ng-click='addToCart(iDependente);'
+                                        />
+
+										<span class="slds-radio--faux ng-scope"></span>
+										<span class="slds-form-element__label" style="color: #000;" >{{::$root.vlocity.getCustomLabel('CEC_OmniYes', 'Sim')}}</span>
+								  </span>
+                            </label>
+                            <label class="slds-radio__label" for="{{control.name}}-fidelityDependente-{{indexDependente}}-no">
+									<span class="slds-radio">
+										<input id='{{control.name}}-fidelityDependente-{{indexDependente}}-no'
+                                               type='radio'
+                                               ng-model='iDependente.Fidelidade__c.value'
+                                               name="{{control.name}}-fidelityDependente-{{indexDependente}}"
+                                               value=false
+                                               ng-value=false
+                                        />
+
+										<span class="slds-radio--faux ng-scope"></span>
+										<span class="slds-form-element__label" style="color: #000;" >{{::$root.vlocity.getCustomLabel('CEC_OmniNo', 'Não')}}</span>
+									</span>
+                            </label>
+                            <fieldset class="slds-form-element slds-form-element_compound" ng-show="iDependente.Fidelidade__c.value === true">
+                                <span class="slds-form-element__label" style="color: #000;" >{{iDependente.DescricaoMulta__c.value}}</span>
+                            </fieldset>
+                        </div>
+
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <!--END DEPENDENTES-->
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,129 @@
+<div class="cec_selectableItemForPromotion" ng-controller="labsxdVlcPromotionsController as am">
+    <div ng-if="bpTree.response.vlcPersistentComponent.vlcCart.totalSize > 0" >
+        <div ng-init="isClicked = false;executeGetPromotion(); " class="slds-section" ng-class="{'slds-is-open': isClicked === true, 'slds-is-close': isClicked === false}"  ng-repeat="i in bpTree.response.vlcPersistentComponent.vlcCart.records" ng-if="i.PricebookEntry.Product2.vlocity_cmt__Type__c == 'Plano'">
+
+            <h3 class="slds-section__title" ng-show="hasPromotions(i, bpTree.response[control.propSetMap['promotionsList']])">
+                <button aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action" ng-click="isClicked = !isClicked;">
+                    <div class="slds-section-icon">
+                        <img class="slds-family-icon" src='{{getFamilyIcon(this,control,i)}}'>
+                    </div>
+
+                    <span class="slds-truncate" title="Section Title"><h1>{{i.PricebookEntry.Product2.Family}} - {{i.PricebookEntry.Product2.Name}}</h1> </span>
+                    <svg class="slds-section__title-action-icon slds-button__icon slds-button__icon_right" aria-hidden="true">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#switch" />
+                    </svg>
+                </button>
+            </h3>
+            <div aria-hidden="false" class="slds-section__content labsxd-container-promotions" id="expando-unique-id-{{$index}}" ng-repeat="orderItemWithPromotion in bpTree.response[control.propSetMap['promotionsList']] | filter:{'Id':i.Id.value}">
+
+                <ng-form name='loopform'
+                         class='slds-form-element vlc-flex vlc-slds-checkbox'
+                         ng-repeat="data in orderItemWithPromotion['Promotions'] as promotionsList">
+
+                    <div class="slds-form-element__control vlc-slds-checkbox" ng-init="data.isPromotion=i.DescricaoPromocao__c.value ? true : false">
+                        <label class="slds-checkbox">
+
+                            <input id='{{::control.name}}i.Id'
+                                   type='checkbox'
+                                   name='loopname'
+                                   ng-disabled='isPromotionAvailable(promotionsList, data)'
+                                   ng-model='data.isPromotion'
+                                   vlc-slds-check-val-checker="response"
+                                   ng-change='setPromotion(i, data)'
+                                   ng-disabled=""
+
+                            />
+
+                            <span class="slds-checkbox--faux"></span>
+
+                            <!-- bubble canceller prevents bubbling of the click events to the checkbox -->
+                            <label class="slds-form-element__label vlc-slds-inline-control__label"
+                                   vlc-bubble-canceller="test">
+
+                                <div vlc-slds-include="vlcLabelController.html"></div>
+
+                                <!-- OMNI-1963 -->
+                                <span for="{{::control.name}}" class="slds-form-element__label">
+											Descrição: {{data.Promotion__c }}
+										</span>
+
+                                <!-- tooltip template -->
+                                <a vlc-slds-tool-tip="test" nubbin-direction="auto top-left" ng-show="{{control.propSetMap.help}}"> i </a>
+
+                                <span class='vlc-asterix icon-v-asterix'
+                                      ng-if='control.req'>
+										</span>
+
+                            </label>
+
+                        </label>
+
+                        <div ng-include="::errHTMLId"></div>
+
+                    </div>
+
+                </ng-form>
+
+                <div class="sub-products" >
+                    <h3 class="slds-section__title_product"  ng-repeat="sva in bpTree.response[control.propSetMap['promotionsList']]" ng-if="sva.ReliesOnReferenceId != sva.AssetReferenceId && sva.ReliesOnReferenceId == i.vlocity_cmt__AssetReferenceId__c.value && sva.Promotions && sva.Promotions.length > 0">
+
+                        <ng-form name='loopform' class='slds-form-element vlc-flex vlc-slds-checkbox'
+                                 ng-repeat="dataOptional in sva['Promotions'] as promotionsOptionalList">
+                            <label for="label-promotion" class="slds-form-element__label">
+									<span id="label-promotion">
+										<!-- {{sva.Product2Name}} -->
+									</span>
+
+                            </label>
+
+                            <div class="slds-form-element__control vlc-slds-checkbox" ng-init="dataOptional.isPromotion=getIsPromotion(i, sva)">
+
+                                <label class="slds-checkbox">
+
+                                    <input id='{{::control.name}}sva.Id'
+                                           type='checkbox'
+                                           name='loopname'
+                                           ng-disabled='isPromotionAvailable(promotionsOptionalList, dataOptional)'
+                                           ng-model='dataOptional.isPromotion'
+                                           vlc-slds-check-val-checker="response"
+                                           ng-change='setPromotion(sva, dataOptional)'
+                                           ng-disabled=""/>
+
+                                    <span class="slds-checkbox--faux"></span>
+
+                                    <!-- bubble canceller prevents bubbling of the click events to the checkbox -->
+                                    <label class="slds-form-element__label vlc-slds-inline-control__label"
+                                           vlc-bubble-canceller="test">
+
+                                        <div vlc-slds-include="vlcLabelController.html"></div>
+
+                                        <!-- OMNI-1963 -->
+                                        <span for="{{::control.name}}" class="slds-form-element__label">
+											Descrição: {{dataOptional.Promotion__c }}
+											</span>
+
+                                        <!-- tooltip template -->
+                                        <a vlc-slds-tool-tip="test" nubbin-direction="auto top-left" ng-show="{{control.propSetMap.help}}"> i </a>
+
+                                        <span class='vlc-asterix icon-v-asterix'
+                                              ng-if='control.req'>
+											</span>
+
+                                    </label>
+
+                                </label>
+
+                                <div ng-include="::errHTMLId"></div>
+
+                            </div>
+
+                        </ng-form>
+
+
+                    </h3>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

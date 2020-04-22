@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            background-color: #00ff00;
+        }
+    </style>
+</head>
+<body>
+    <div class="class1" id="div1">
+        Hello
+        <div class="class1">
+            World!
+        </div>
+    </div>
+    <button class="class1" id="button1">Press Me</button>
+    <div>
+        <div class="class1"></div>
+    </div>
+    <form id="form">
+        Name: <input type="text">
+        <input type="submit" value="Save">
+    </form>
+    <script>
+        var form = document.getElementById('form')
+        form.addEventListener('submit',function (event) {
+            event.preventDefault()
+            var textInput = form.elements[0]
+            alert(textInput.value)
+        })
+        // document.addEventListener('DOMContentLoaded',function (event) {
+        //     alert('Page has been loaded')
+        // })
+        // var button1 = document.getElementById('button1')
+        // button1.addEventListener('click',function (event) {
+        //     var target = event.target;
+        //     alert(target.innerHTML)
+        // })
+        // document.getElementById('div1').addEventListener('mouseover',function (event) {
+        //     event.target.style.backgroundColor = '#0000ff'
+        // })
+        // var div1 = document.getElementById('div1')
+        // var newDiv = document.createElement('div')
+        // newDiv.innerHTML = 'Hello there!'
+        // div1.appendChild(newDiv)
+        // document.body.removeChild(div1)
+        // var div1 = document.getElementById('div1')
+        // var divClass = div1.getAttribute('class')
+        // var divHTML = div1.innerHTML
+        // var noValueDivColor = div1.style.backgroundColor
+        // var computedVal = window.getComputedStyle(div1).backgroundColor
+        // //alert( computedVal )
+        // div1.setAttribute('class','class2')
+        // div1.innerHTML = 'Good bye!'
+        // alert(div1.getAttribute('class'))
+        // div1.style.backgroundColor = '#0000ff'
+        // div1.setAttribute('style', 'height: 100px') // REPLACES ALL STYLE ATTRIBUTE, CLEARING THE BLUE COLOR JUST SET
+        // var class1 = document.getElementsByClassName('class1')
+        // var div1 = document.getElementById('div1')
+        // var div = document.getElementsByTagName('DIV');
+        // var qs = document.querySelector('.class1');
+        // var qsAll = document.querySelectorAll('.class1')
+        // console.log(class1)
+        // console.log(div1)
+        // console.log(div)
+        // console.log(qs)
+        // console.log(qsAll)
+        // var innerDiv = div1.getElementsByClassName('class1')
+        // console.log(innerDiv)
+    </script>
+</body>
+</html>

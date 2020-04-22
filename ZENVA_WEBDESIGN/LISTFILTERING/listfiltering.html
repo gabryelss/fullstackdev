@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>List Filtering</title>
+    <style>
+        body{
+            padding: 40px;
+            background-color: #b10dc9;
+            font-family: Arial;
+        }
+        h1{
+            text-align: center;
+            color: white;
+        }
+        .search-container{
+            display: flex;
+            justify-content: space-around;
+        }
+        #search-bar{
+            width: 80%;
+            height: 40px;
+            font-size: 20px;
+        }
+        .adventures-container{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+            margin: 40px;
+        }
+        .adventure{
+            width: 120px;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 10px;
+            text-align: center;
+            background-color: white;
+
+        }
+    </style>
+</head>
+<body>
+    <h1>Find Your Local Adventure</h1>
+    <div class="search-container">
+        <input id='search-bar' type="text">
+    </div>
+    <div class="adventures-container">
+        <div class="adventure">Mountain Bike Tour</div>
+        <div class="adventure">Hinterlands Tour</div>
+        <div class="adventure">Sky Diving</div>
+        <div class="adventure">Local Food Festival</div>
+        <div class="adventure">Sunday Markets Tour</div>
+        <div class="adventure">Food Tasting Tour</div>
+        <div class="adventure">Snorkling Tour</div>
+        <div class="adventure">Forest Experience</div>
+    </div>
+    <script>
+        var adventures = document.getElementsByClassName('adventure')
+        var searchBar = document.getElementById('search-bar')
+        searchBar.addEventListener('keyup',function () {
+            var text = searchBar.value.toLowerCase()
+            for( adventureIndex in adventures ) {
+                var adventure = adventures[adventureIndex]
+                if( adventure.innerHTML.toLowerCase().includes(text) ){
+                    adventure.style.display = 'Block'
+                } else {
+                    adventure.style.display = 'none'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

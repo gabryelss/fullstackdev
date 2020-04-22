@@ -1,0 +1,299 @@
+<div class="cec_selectableItemForFidelidade" ng-controller="labsxdVlcFidelidadeController">
+
+    <div ng-repeat="i in bpTree.response.vlcPersistentComponent.vlcCart.records"
+         ng-if="i.PricebookEntry.Product2.vlocity_cmt__Type__c == 'Plano'">
+        <div class="slds-section slds-border"
+             ng-class="{'slds-is-open': isClicked === true, 'slds-is-close': isClicked === false}"
+             ng-repeat="plan in bpTree.response.recordsInstallments | orderBy:getFamilySequence" ng-init="isClicked = false;"
+             ng-if="i.Id.value == plan.OrderItemID">
+            <h3 class="slds-section__title slds-custom">
+                <button aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action"
+                        ng-click="isClicked = !isClicked">
+                    <div class="slds-section-icon">
+                        <img class="slds-family-icon" src='{{getFamilyIcon(this,control,plan)}}'>
+                    </div>
+                    <span class="slds-truncate" title="Section Title">
+            <h1>{{plan.sourceProd.Family}} - {{plan.sourceProd.Name}}</h1>
+          </span>
+                    <svg class="slds-section__title-action-icon slds-button__icon" aria-hidden="true">
+                        <use xmlns:xlink="http://www.w3.org/1999/xlink"
+                             xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#switch" />
+                    </svg>
+                </button>
+            </h3>
+            <div class="slds-section__content">
+                <div class="fix-margin-content">
+
+
+
+                    <div class="slds-section">
+                        <div class="slds-container fix-margin">
+                            <div>
+                                <h3 class="slds-section__title slds-custom">
+                  <span class="slds-truncate" title="Section Title">
+                    <h1 style="color: #49739c;">
+                      {{::$root.vlocity.getCustomLabel('CEC_OmniFidelity_AddFidelity', 'Você gostaria de adicionar fidelidade?')}}
+                    </h1>
+                  </span>
+                                </h3>
+                            </div>
+                            <div class="slds-form-element__control">
+                                <div class="slds-form-element">
+                                    <div class="slds-form-element__control">
+                                        <div class="slds-radio" ng-if="plan.showRadioOptions.yes">
+                                            <input type="radio" name="options{{control.name}}FR-{{$index}}" id="radioFR-{{$index}}SI"
+                                                   value="true" ng-value="true" ng-model="plan.isFedelity" ng-disabled="!plan.showRadioOptions.no"
+                                                   ng-click="updateFidelidade(plan)" />
+                                            <label class="slds-radio__label" for="radioFR-{{$index}}SI">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"
+                                                      style="color: #000;">{{::$root.vlocity.getCustomLabel('CEC_OmniYes', 'Sim')}}</span>
+                                            </label>
+                                        </div>
+                                        <div class="slds-radio" ng-if="plan.showRadioOptions.no">
+                                            <input type="radio" name="options{{control.name}}FR-{{$index}}" id="radioFR-{{$index}}NO"
+                                                   value="false" ng-value="false" ng-model="plan.isFedelity"
+                                                   ng-disabled="!plan.showRadioOptions.yes" ng-click="updateFidelidade(plan)" />
+                                            <label class="slds-radio__label" for="radioFR-{{$index}}NO">
+                                                <span class="slds-radio_faux"></span>
+                                                <span class="slds-form-element__label"
+                                                      style="color: #000;">{{::$root.vlocity.getCustomLabel('CEC_OmniNo', 'Não')}}</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+                    <h3 class="slds-section__title slds-custom" ng-if="plan.sourceProd.Family != 'Movel'">
+            <span class="slds-truncate" title="Section Title">
+              <h1>Taxa de adesão</h1>
+            </span>
+                    </h3>
+                    <div class="slds-col--padded slds-size--4-of-12 ng-scope" ng-if="plan.installments !== '0'">
+                        <ng-form name="loopform" class="slds-form-element vlc-flex vlc-slds-select-control">
+                            <div class="vlc-slds-control-action__container">
+                            </div>
+                            <div class="slds-form-element__control slds-input-has-icon slds-has-input-has-icon--right">
+                                <div class="slds-select_container vlc-control-wrapper vlc-slds__border vlc-slds__border--primary"
+                                     help="false"
+                                     ng-init="plan.installmentSelected=i.NumeroParcelas__c.value ? {label: i.NumeroParcelas__c.value +'X',value: i.NumeroParcelas__c.value} : undefined">
+                  <span class="vlc-slds-form-element__center--horizontal">
+                    {{plan.installmentSelected.label}}
+                  </span>
+                                    <select name="loopname" id="Select1" style="opacity: -1;" ng-required="true"
+                                            ng-model="plan.installmentSelected" ng-change="saveConfigurationFidelidade(plan)"
+                                            class="slds-select" vlc-slds-val-checker="response"
+                                            ng-options="item as item.label for item in plan.options track by item.value "></select>
+                                    <label for="Select1" class="slds-form-element__label ng-binding">Selecionar</label>
+                                    <a vlc-slds-tool-tip="test" ng-show="false" class="ng-scope ng-hide" tabindex="0" aria-hidden="true">
+                                        i </a>
+
+                                </div>
+                                <svg aria-hidden="true"
+                                     class="slds-icon slds-icon--small nds-icon nds-icon_small slds-button__icon slds-button__icon--large"
+                                     xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" sprite="'utility'"
+                                     icon="'down'" size="'small'" extra-classes="'slds-button__icon slds-button__icon--large'"
+                                     viewBox="0 0 52 52" alt="down">
+                                    <path fill="inherit" xmlns="http://www.w3.org/2000/svg"
+                                          d="m8.3 14h35.4c1 0 1.7 1.3 0.9 2.2l-17.3 21.2c-0.6 0.8-1.9 0.8-2.5 0l-17.5-21.2c-0.7-0.9-0.1-2.2 1-2.2z">
+                                    </path>
+                                </svg>
+                                <div ng-include="::errHTMLId" class="ng-scope">
+                                    <div class="vlc-slds-error-block ng-scope">
+                                        <div class="error ng-hide" ng-show="control.srvErr" aria-hidden="true">
+                                            <small class="description ng-binding"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-form>
+                    </div>
+                    <div class="slds-col--padded slds-size--4-of-12 ng-scope"
+                         ng-if="plan.installments === '0' && plan.sourceProd.Family != 'Movel'">
+                        <label style="font-size: 15px !important;">Grátis</label>
+
+                    </div>
+                </div>
+                <div class="fix-margin-content"
+                     ng-if="plan.multa !== null && plan.multa !== '' ">
+
+                    <h3 class="slds-section__title slds-custom">
+            <span class="slds-truncate" title="Section Title">
+              <h1>Multa</h1>
+            </span>
+                    </h3>
+                    <div class="slds-col--padded slds-size--9-of-12 ng-scope">
+                        <label style="font-size: 15px !important;">{{ plan.multa }}</label>
+                    </div>
+                </div>
+
+
+
+                <!--BEGIN DEPENDENTES -->
+
+                <div ng-repeat="iDependente in bpTree.response.vlcPersistentComponent.vlcCart.records | orderBy:'CreatedDate' "
+                     ng-if="iDependente.PricebookEntry.Product2.vlocity_cmt__Type__c == 'Dependente' && iDependente.ReliesOnReferenceId__c.value == i.vlocity_cmt__AssetReferenceId__c.value"
+                     style="padding:32px !important;">
+                    <div class="slds-section slds-border"
+                         ng-class="{'slds-is-open': isClicked === true, 'slds-is-close': isClicked === false}"
+                         ng-repeat="planDependente in bpTree.response.recordsInstallments" ng-init="isClickedDependente = false;"
+                         ng-if="iDependente.Id.value == planDependente.OrderItemID">
+
+
+                        <h3 class="slds-section__title slds-custom">
+                            <button aria-controls="expando-unique-id" aria-expanded="true"
+                                    class="slds-button slds-section__title-action" ng-click="isClickedDependente = !isClickedDependente">
+                <span class="slds-truncate" title="Section Title">
+                  <h1>{{planDependente.sourceProd.Name}}</h1>
+                </span>
+                            </button>
+                        </h3>
+                        <div class="slds-section__content">
+                            <div class="fix-margin-content">
+
+
+                                <div class="slds-section">
+                                    <div class="slds-container fix-margin">
+                                        <div>
+                                            <h3 class="slds-section__title slds-custom">
+                        <span class="slds-truncate" title="Section Title">
+                          <h1 style="color: #49739c;">
+                            {{::$root.vlocity.getCustomLabel('CEC_OmniFidelity_AddFidelity', 'Você gostaria de adicionar fidelidade?')}}
+                          </h1>
+                        </span>
+                                            </h3>
+                                        </div>
+                                        <div class="slds-form-element__control">
+                                            <div class="slds-form-element">
+                                                <div class="slds-form-element__control">
+                                                    <div class="slds-radio" ng-if="planDependente.showRadioOptions.yes">
+                                                        <input type="radio" name="options{{control.name}}FRD-{{$index}}" id="radioFRD-{{$index}}SI"
+                                                               value="true" ng-value="true" ng-model="planDependente.isFedelity"
+                                                               ng-disabled="!planDependente.showRadioOptions.no" ng-click="updateFidelidade(planDependente)" />
+                                                        <label class="slds-radio__label" for="radioFRD-{{$index}}SI">
+                                                            <span class="slds-radio_faux"></span>
+                                                            <span class="slds-form-element__label"
+                                                                  style="color: #000;">{{::$root.vlocity.getCustomLabel('CEC_OmniYes', 'Sim')}}</span>
+                                                        </label>
+                                                    </div>
+                                                    <div class="slds-radio" ng-if="planDependente.showRadioOptions.no">
+                                                        <input type="radio" name="options{{control.name}}FRD-{{$index}}" id="radioFRD-{{$index}}NO"
+                                                               value="false" ng-value="false" ng-model="planDependente.isFedelity"
+                                                               ng-disabled="!planDependente.showRadioOptions.yes" ng-click="updateFidelidade(planDependente)" />
+                                                        <label class="slds-radio__label" for="radioFRD-{{$index}}NO">
+                                                            <span class="slds-radio_faux"></span>
+                                                            <span class="slds-form-element__label"
+                                                                  style="color: #000;">{{::$root.vlocity.getCustomLabel('CEC_OmniNo', 'Não')}}</span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <h3 class="slds-section__title slds-custom" ng-if="plan.sourceProd.Family != 'Movel'">
+                  <span class="slds-truncate" title="Section Title">
+                    <h1>Taxa de adesão</h1>
+                  </span>
+                                </h3>
+                                <div class="slds-col--padded slds-size--4-of-12 ng-scope" ng-if="planDependente.installments !== '0'">
+                                    <ng-form name="loopform" class="slds-form-element vlc-flex vlc-slds-select-control">
+                                        <div class="vlc-slds-control-action__container">
+                                        </div>
+                                        <div class="slds-form-element__control slds-input-has-icon slds-has-input-has-icon--right">
+                                            <div class="slds-select_container vlc-control-wrapper vlc-slds__border vlc-slds__border--primary"
+                                                 help="false"
+                                                 ng-init="planDependente.installmentSelected=i.NumeroParcelas__c.value ? {label: iDependente.NumeroParcelas__c.value +'X',value: iDependente.NumeroParcelas__c.value} : undefined">
+                        <span class="vlc-slds-form-element__center--horizontal">
+                          {{planDependente.installmentSelected.label}}
+                        </span>
+                                                <select name="loopname" id="Select1" style="opacity: -1;" ng-required="true"
+                                                        ng-model="planDependente.installmentSelected"
+                                                        ng-change="saveConfigurationFidelidade(planDependente)" class="slds-select"
+                                                        vlc-slds-val-checker="response"
+                                                        ng-options="item as item.label for item in planDependente.options track by item.value "></select>
+                                                <label for="Select1" class="slds-form-element__label ng-binding">Selecionar</label>
+                                                <a vlc-slds-tool-tip="test" ng-show="false" class="ng-scope ng-hide" tabindex="0"
+                                                   aria-hidden="true"> i </a>
+
+                                            </div>
+                                            <svg aria-hidden="true"
+                                                 class="slds-icon slds-icon--small nds-icon nds-icon_small slds-button__icon slds-button__icon--large"
+                                                 xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" sprite="'utility'"
+                                                 icon="'down'" size="'small'" extra-classes="'slds-button__icon slds-button__icon--large'"
+                                                 viewBox="0 0 52 52" alt="down">
+                                                <path fill="inherit" xmlns="http://www.w3.org/2000/svg"
+                                                      d="m8.3 14h35.4c1 0 1.7 1.3 0.9 2.2l-17.3 21.2c-0.6 0.8-1.9 0.8-2.5 0l-17.5-21.2c-0.7-0.9-0.1-2.2 1-2.2z">
+                                                </path>
+                                            </svg>
+                                            <div ng-include="::errHTMLId" class="ng-scope">
+                                                <div class="vlc-slds-error-block ng-scope">
+                                                    <div class="error ng-hide" ng-show="control.srvErr" aria-hidden="true">
+                                                        <small class="description ng-binding"></small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </ng-form>
+                                </div>
+                                <div class="slds-col--padded slds-size--4-of-12 ng-scope"
+                                     ng-if="planDependente.installments === '0' && plan.sourceProd.Family != 'Movel'">
+                                    <label style="font-size: 15px !important;">Grátis</label>
+                                </div>
+                            </div>
+                            <div class="fix-margin-content"
+                                 ng-if="planDependente.multa !== null && planDependente.multa !== '' ">
+                                <h3 class="slds-section__title slds-custom">
+                  <span class="slds-truncate" title="Section Title">
+                    <h1>Multa</h1>
+                  </span>
+                                </h3>
+                                <div class="slds-col--padded slds-size--9-of-12 ng-scope">
+                                    <label
+                                            style="font-size: 15px !important;">{{ planDependente.multa }}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <!--div ng-if="planDependente.installments !== '0'">
+                                        <hr>
+                                        <button ng-show="isClicked" style="margin: 20px; left: 40%;" class="slds-button slds-button--brand" ng-click="saveConfigurationFidelidade(plan)">
+                                            Salvar
+                                        </button>
+                                    </div-->
+                    </div>
+
+                </div>
+
+
+                <!--END DEPENDENTES -->
+
+
+
+
+
+
+
+
+
+            </div>
+            <!--div ng-if="plan.installments !== '0'">
+                      <hr>
+                      <button ng-show="isClicked" style="margin: 20px; left: 40%;" class="slds-button slds-button--brand" ng-click="saveConfigurationFidelidade(plan)">
+                          Salvar
+                      </button>
+                  </div-->
+        </div>
+
+    </div>

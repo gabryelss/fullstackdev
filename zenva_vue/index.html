@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VUE Tutorial</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.10/dist/vue.js"></script>
+</head>
+<body>
+    <div id='firstDiv'>
+        <input v-model="number">
+        <p>number is: {{number}}</p>
+        <ul>
+            <li v-for="numberI in numbers">{{numberI}}</li>
+        </ul>
+    </div>
+    <div id="secondDiv">
+        <button v-on:click="openCloseDoor">Open or close door</button>
+        <p v-if='isDoorOpened'>The door is opened</p>
+        <p v-else>The door is closed</p>
+    </div>
+    <div id="thirdDiv">
+        <ul>
+            <grocery-item v-for="item in groceryItems" v-bind:groceryitem="item"></grocery-item>
+        </ul>
+    </div>
+
+    <script>
+        var firstVue = new Vue({
+            el: '#firstDiv',
+            data: {
+                number: 1,
+                numbers: [1,2,3]
+            }
+        })
+        firstVue.number = 5
+        // firstVue.$watch('number',function () {
+        //     alert('number has changed to ' + firstVue.number)
+        // })
+        // firstVue.number = 10
+        var secondVue = new Vue({
+            el: '#secondDiv',
+            data: {
+                isDoorOpened: false
+            },
+            methods: {
+                openCloseDoor: function () {
+                    this.isDoorOpened = !this.isDoorOpened
+                }
+            }
+        })
+
+        Vue.component('grocery-item',{
+            props: ['groceryitem'],
+            template: '<li>{{ groceryitem.quantity }} {{ groceryitem.name }}</li>'
+        })
+        var thirdVue = new Vue({
+            el: '#thirdDiv',
+            data: {
+                groceryItems: [
+                    { name: 'Bread', quantity: 2 },
+                    { name: 'Cheese', quantity: 2 },
+                    { name: 'Apples', quantity: 2 },
+                ]
+            }
+        })
+
+    </script>
+</body>
+</html>

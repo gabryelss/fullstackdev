@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b90f3ee2-2e85-4454-96fd-e5afaf3b95b1" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1XRnfNg8ZWVOZJjdqYrVCWzhyS4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CLARODEVCON1" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="settings.editor.selected.configurable" value="diff.base" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/103/cec_selectableItemForCatalogo.html" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\gabrysilva\IdeaProjects\JAVASCRIPT\devcom" />
+    </key>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b90f3ee2-2e85-4454-96fd-e5afaf3b95b1" name="Default Changelist" comment="" />
+      <created>1581017876800</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1581017876800</updated>
+      <workItem from="1581017880324" duration="17967000" />
+      <workItem from="1581083546517" duration="27194000" />
+      <workItem from="1581619554002" duration="1536000" />
+      <workItem from="1581689503463" duration="68000" />
+      <workItem from="1582238709269" duration="1374000" />
+      <workItem from="1582316352594" duration="1764000" />
+      <workItem from="1583156488248" duration="2273000" />
+      <workItem from="1583257988420" duration="1719000" />
+      <workItem from="1583265101578" duration="1640000" />
+      <workItem from="1583516433198" duration="4491000" />
+      <workItem from="1585754218605" duration="17000" />
+      <workItem from="1585857609715" duration="68000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1583530347250">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1583530347250" />
+    <state x="740" y="279" key="FileChooserDialogImpl" timestamp="1585857624004">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1585857624004" />
+    <state x="463" y="165" key="SettingsEditor" timestamp="1583516528967">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="463" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1583516528967" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1581458789389">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1581458789389" />
+  </component>
+</project>

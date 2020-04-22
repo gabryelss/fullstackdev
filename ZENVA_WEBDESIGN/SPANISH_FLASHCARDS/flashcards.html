@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spanish Flashcards</title>
+    <style>
+        body{
+            background-color: #5f9fff;
+            padding: 40px;
+            font-family: courier;
+        }
+        .container{
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-around;
+        }
+        .card{
+            flex: none;
+            margin-top: 10px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+        }
+        .card-title, .card-answer{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .card-button{
+            width: 100%;
+            margin-top: 10px;
+            border: 1px solid #0070bb;
+            background-color: white;
+            color: #0070bb;
+        }
+        .card-answer{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div><img src="Images/apple.png"></div>
+            <div class="card-title">Apple</div>
+            <button class="card-button">Show</button>
+            <div class="card-answer">Manzana</div>
+        </div>
+        <div class="card">
+            <div><img src="Images/dog.png"></div>
+            <div class="card-title">Dog</div>
+            <button class="card-button">Show</button>
+            <div class="card-answer">Perro</div>
+        </div>
+        <div class="card">
+            <div><img src="Images/city.png"></div>
+            <div class="card-title">City</div>
+            <button class="card-button">Show</button>
+            <div class="card-answer">Ciudad</div>
+        </div>
+        <div class="card">
+            <div><img src="Images/chair.png"></div>
+            <div class="card-title">Chair</div>
+            <button class="card-button">Show</button>
+            <div class="card-answer">Silla</div>
+        </div>
+    </div>
+    <script>
+        varCards = document.querySelectorAll('.card')
+        varCards.forEach((element) => {
+            var button = element.getElementsByClassName('card-button')[0]
+            var answer = element.getElementsByClassName('card-answer')[0]
+            button.addEventListener('click',function (event) {
+                if(button.innerHTML === 'Show'){
+                    answer.style.display = 'Block'
+                    button.innerHTML = 'Hide'
+                } else {
+                    answer.style.display = 'none'
+                    button.innerHTML = 'Show'
+                }
+
+            })
+        });
+    </script>
+</body>
+</html>

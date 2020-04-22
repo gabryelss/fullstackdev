@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Grid</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        #parent{
+            background: rgba(0,0,0,.5);
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-auto-rows: 100px 150px 150px 50px;
+        }
+        .child1{
+            background: skyblue;
+        }
+        .child2{
+            background: powderblue;
+        }
+        .child3{
+            background: cadetblue;
+        }
+        .child4{
+            background: indianred;
+        }
+        .child5{
+            background: salmon;
+        }
+        .child6{
+            background: firebrick;
+        }
+        .child7{
+            background: greenyellow;
+        }
+        .child8{
+            background: green;
+        }
+        .child9{
+            background: darkgreen;
+        }
+    </style>
+</head>
+<body>
+<div id="parent">
+    <div class="child1">1</div>
+    <div class="child2">2</div>
+    <div class="child3">3</div>
+    <div class="child4">4</div>
+    <div class="child5">5</div>
+    <div class="child6">6</div>
+    <div class="child7">7</div>
+    <div class="child8">8</div>
+    <div class="child9">9</div>
+</div>
+</body>
+</html>

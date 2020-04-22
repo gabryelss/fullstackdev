@@ -1,0 +1,179 @@
+<div class="cec_selectableItemForCatalogo" ng-controller="labsxdVlcCatalogoController">
+    <div ng-init="isClicked = false;item.familyName=='TV'?isFamilyTV=true:isFamilyTV=false" class="slds-section" ng-class="{'slds-is-open': isClicked === true, 'slds-is-close': isClicked === false}"
+         ng-repeat='item in control.vlcSI[control.itemsKey]'>
+        <h3 class="slds-section__title">
+            <button aria-controls="expando-unique-id" aria-expanded="true" class="slds-button slds-section__title-action" ng-click="isClicked = !isClicked;">
+                <div class="slds-section-icon">
+                    <img class="slds-family-icon" src='{{item.familyIcon}}'>
+                </div>
+                <span class="slds-truncate" title="Section Title"><h1>{{item.familyName}}</h1> </span>
+                <svg class="slds-section__title-action-icon slds-button__icon slds-button__icon_right" aria-hidden="true">
+                    <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/apexpages/slds/latest/assets/icons/utility-sprite/svg/symbols.svg#switch" />
+                </svg>
+
+            </button>
+        </h3>
+        <div aria-hidden="false" class="slds-section__content" id="expando-unique-id">
+
+            <div class="slds-card-container" ng-repeat="product in item.products | orderBy:(isFamilyTV?['Sequencia__c']:['-vlocity_cmt__SubType__c' , 'Sequencia__c'])"
+                 ng-init="initConfPlanER(plan)" ng-if="isUnique(product,item.products)">
+
+                <article class="slds-card">
+                    <div class="slds-card__header slds-grid" style="display: flex !important;">
+                        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+
+                            <h1 class="slds-card-header-title">
+
+                                <!--	<span>{{product.Name}}</span>-->
+
+                                <!--	<span>{{product.Name | limitTo :15:' ...'}}</span>-->
+                                <span title="{{product.Name}}">{{product.Name}}</span>
+                                <!-- ktest1 -->
+                                <p id="ktest1" style="display: none">{{product}}</p>
+
+                            </h1>
+
+                        </header>
+                    </div>
+
+                    <!-- IMG TV-->
+                    <img src="{{attachments.url}}" class="slds-product-img-tv tv-banner" ng-repeat="attachments in product.Attachments | filter: { title: 'Pacote Now'}"
+                         ng-if="product.Family === 'TV'" />
+                    <p ng-if="product.Family === 'TV'" style="text-align:center;font-size: 10px;color: #999;width: cac(100% + 14px);max-width: none !important;height: 10px;margin-bottom:15px;">
+                        *Sujeito á disponibilidade técnica da região
+                    </p>
+
+                    <div class="slds-card__body">
+                        <table>
+                            <tbody ng-init="pricesList = getPrices(product)" ng-repeat='price in product.prices'>
+                            <tr class="slds-table-price" ng-if="price.modalidade == 'INDIVIDUAL'">
+                                <td>{{price.modalidade}}</td>
+                                <td>R${{price.valor}}</td>
+                            </tr>
+
+                            <tr class="slds-table-price" ng-if="pricesList.length == 0">
+                                <td>{{::$root.vlocity.getCustomLabel('CEC_OmniCatalogo_SinglePrice', 'Single')}}</td>
+                                <td style="text-align:right;">{{product['vlocity_cmt__RecurringPrice__c'] | currency:bpTree.cpqCurrencySymbol | numFormatFilter }}</td>
+                            </tr>
+
+                            <tr class="slds-table-price" ng-repeat="price in pricesList | orderBy:['Sequencia']" ng-if="pricesList.length > 0">
+                                <td>{{price.Name}}<span ng-if="price.Name == 'Combo Multi' && product.Family == 'Internet Fixa' && product.Description__c"
+                                                        style="display:block;">{{product.Description__c}}</span></td>
+                                <td style="text-align:right;" ng-if="!(price.Name == 'Combo Multi' && (product.Name.toUpperCase() == 'ILIMITADO MUNDO TOTAL' || product.Name.toUpperCase() == 'ILIMITADO BRASIL'))">{{price['Value'] | currency:bpTree.cpqCurrencySymbol | numFormatFilter }}</td>
+                                <td style="text-align:center;" ng-if="price.Name == 'Combo Multi' && (product.Name.toUpperCase() == 'ILIMITADO MUNDO TOTAL' || product.Name.toUpperCase() == 'ILIMITADO BRASIL')">
+                                    - </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+                        <div ng-if="product.Unidade == 'Residencial' && product.Restrito == false">
+                            <div style="height: 20px">
+                                <p ng-if="product.Name == '35 MB' || product.Name == '120 MB'" style="text-align:center;font-size: 10px;color: #999;width: 100%;max-width: none !important;height: 10px;margin-bottom:15px;">
+                                    *COMBO MULTI dobro da velocidade <br>(Consulte cidades elegíveis)
+                                </p>
+                            </div>
+
+                            <p ng-if="product.Name == 'Claro Pós Play 7GB' || product.Name == 'Claro Pós Play 10GB' || product.Name == 'Claro Pós Play 15GB' || product.Name == 'Claro Pós Play 30GB' || product.Name == 'Claro Pós Play 60GB'" style="text-align:center;font-size: 10px;color: #999;width: 100%;max-width: none !important;height: 10px;margin-bottom:15px;">
+                                *COMBO MULTI dobro da franquia
+                            </p>
+                        </div>
+
+                        <!-- EXTRA PLAY-->
+                        <div class="slds-container-extraplay" ng-repeat="attachments in product.Attachments | filter: { title: 'Extra Play'}">
+
+                            <div class="slds-extraplay">
+
+                                <h1>{{::$root.vlocity.getCustomLabel('CEC_OmniCatalogo_Extraplay', 'EXTRAPLAY')}}</h1>
+
+                            </div>
+
+                            <div class="slds-media__figure">
+                                <img class="slds-product-img" src="{{attachments.url}}">
+                            </div>
+
+                        </div>
+
+                        <!-- EXTRA PLAY CONTROLE -->
+                        <div class="slds-container-extraplay" ng-if="product.Family === 'Movel' && product.vlocity_cmt__SubType__c == 'Controle'">
+
+                            <div class="slds-media__figure">
+                                <img class="slds-product-img" src="{{product.Attachments.url}}">
+                            </div>
+
+                        </div>
+
+
+
+
+
+                        <!-- PACOTE MOBILE-->
+                        <div class="slds-container-pacote" ng-repeat="attachments in product.Attachments | filter: { title: 'Pacote Mobilidade'}">
+
+
+
+                            <div class="slds-media__figure">
+                                <img class="slds-product-img" src="{{attachments.url}}">
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- TECHNICAL DESCRIPTION INTERNET FIXA-->
+
+                        <div style="padding-top: 15px;" ng-if="product.Family === 'Internet Fixa' && product.Technical_Description__c">
+                            <div class="slds-container-extraplay" ng-repeat="(key, data) in getTechnicalDescriptionINTERNET(product.Technical_Description__c)"
+                                 style="padding: 5px 0px 5px 0px;">
+                                <div class="slds-internet" style="clear: both;" ng-if="!isObject(data)">
+                                    <p class="slds-alignleft medium-size-text bold-text">{{key}}</p>
+                                    <p class="slds-alignright medium-size-text">{{data}} </p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!-- TECHNICAL DESCRIPTION TV-->
+
+                        <div style="padding-top: 15px;" ng-if="product.Family === 'TV' && product.Technical_Description__c">
+                            <div class="slds-container-extraplay" ng-repeat="(key, data) in getTechnicalDescriptionTV(product.Technical_Description__c, 'HDTV')"
+                                 style="padding: 5px 0px 5px 0px;">
+                                <div class="slds-internet" style="clear: both;" ng-if="!isObject(data)">
+                                    <p class="slds-alignleft medium-size-text bold-text">{{key}}</p>
+                                    <p class="slds-alignright medium-size-text light-text">{{data}} </p>
+                                </div>
+                            </div>
+                            <div class="slds-container-extraplay" style="padding: 5px 0px 5px 0px;">
+                                <div class="slds-internet" style="clear: both;">
+                                    <p class="medium-size-text bold-text">CANAIS</p>
+                                    <div class="slds-container-extraplay" ng-repeat="(key, data) in getTechnicalDescriptionTV(product.Technical_Description__c, 'Channels')"
+                                         style="padding: 5px 0px 5px 0px;">
+                                        <div class="slds-internet" style="clear: both;" ng-if="!isObject(data)">
+                                            <p class="slds-alignleft medium-size-text" style="margin-left: 15px !important;">{{key}}</p>
+                                            <p class="slds-alignright medium-size-text">{{data}} </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+
+
+
+                    </div>
+
+                    <div class="slds-container-adicionar" ng-class="{'btn-is-tv': product.Family === 'TV'}">
+                        <!-- <button ng-click="invokeAction(product);" type="button" ng-if="product.Family === 'TV'" class="btn-canais btn-secondary btn">Canais</button> -->
+                        <button ng-click="addToCart(product);" type="button" class=" btn-add-to-cart btn-primary btn" ng-disabled="bpTree.response.FamilyAddedControl[product.Family]">{{::$root.vlocity.getCustomLabel('CEC_OmniCatalogo_Adicionar', 'Adicionar')}}</button>
+                        <!-- setSetValuesPromociones(); removed from add to cart -->
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lato Font -->
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">

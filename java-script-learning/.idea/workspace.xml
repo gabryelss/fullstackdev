@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="813d7bb1-a63b-42fc-aa06-9ad732e9076e" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1TDHPHDxoTJagz1y1zmCoPh56dT" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="javascript.nodejs.core.library.configured.version" value="10.16.0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/FUNCTIONS/undefined-null.js" />
+    <property name="nodejs_interpreter_path" value="$APPLICATION_CONFIG_DIR$/node/node-v10.16.0-win-x64/node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\gabrysilva\IdeaProjects\java-script-learning\BASICS" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="undefined-null.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="FUNCTIONS/undefined-null.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Node.js.undefined-null.js" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="813d7bb1-a63b-42fc-aa06-9ad732e9076e" name="Default Changelist" comment="" />
+      <created>1572987719833</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1572987719833</updated>
+      <workItem from="1572987721111" duration="691000" />
+      <workItem from="1573068512949" duration="5370000" />
+      <workItem from="1573574886949" duration="2946000" />
+      <workItem from="1573739451579" duration="5000" />
+      <workItem from="1574197169841" duration="2499000" />
+      <workItem from="1574702021489" duration="7581000" />
+      <workItem from="1576531991291" duration="8000" />
+      <workItem from="1576679874611" duration="848000" />
+      <workItem from="1576681570486" duration="44000" />
+      <workItem from="1576681627190" duration="100000" />
+      <workItem from="1576681740256" duration="32000" />
+      <workItem from="1576681784699" duration="1728000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="552" y="182" key="#Illuminated_Cloud" timestamp="1576686810942">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="182" key="#Illuminated_Cloud/0.0.1920.1040@0.0.1920.1040" timestamp="1576686810942" />
+    <state x="740" y="279" key="FileChooserDialogImpl" timestamp="1576686187705">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="279" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1576686187705" />
+    <state x="463" y="166" key="SettingsEditor" timestamp="1576681771570">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="463" y="166" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1576681771570" />
+    <state x="342" y="248" key="new project wizard" timestamp="1576686851640">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="342" y="248" key="new project wizard/0.0.1920.1040@0.0.1920.1040" timestamp="1576686851640" />
+  </component>
+</project>
